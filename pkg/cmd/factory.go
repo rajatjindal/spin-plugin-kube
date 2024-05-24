@@ -7,6 +7,7 @@ import (
 	"k8s.io/apimachinery/pkg/runtime"
 	utilruntime "k8s.io/apimachinery/pkg/util/runtime"
 	"k8s.io/cli-runtime/pkg/genericclioptions"
+	"k8s.io/client-go/dynamic"
 	"k8s.io/client-go/kubernetes"
 	clientgoscheme "k8s.io/client-go/kubernetes/scheme"
 	cmdutil "k8s.io/kubectl/pkg/cmd/util"
@@ -41,4 +42,9 @@ func getKubernetesClientset() (kubernetes.Interface, error) {
 	}
 
 	return kubernetes.NewForConfig(config)
+}
+
+func getDynamicClient() (dynamic.Interface, error) {
+	matchVersionKubeConfigFlags := cmdutil.NewMatchVersionFlags(configFlags)
+	return cmdutil.NewFactory(matchVersionKubeConfigFlags).DynamicClient()
 }
