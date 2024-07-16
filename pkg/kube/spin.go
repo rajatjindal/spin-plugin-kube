@@ -47,6 +47,16 @@ func (i *Impl) ApplySpinApp(ctx context.Context, app *spinv1alpha1.SpinApp) erro
 	return i.kubeclient.Patch(ctx, app, patchMethod, patchOptions)
 }
 
+func (i *Impl) UpdateSpinApp(ctx context.Context, app *spinv1alpha1.SpinApp) error {
+	newapp, err := i.GetSpinApp(ctx, client.ObjectKeyFromObject(app))
+	if err != nil {
+		return err
+	}
+
+	app.ResourceVersion = newapp.ResourceVersion
+	return i.kubeclient.Update(ctx, app)
+}
+
 func (i *Impl) GetSpinApp(ctx context.Context, name client.ObjectKey) (spinv1alpha1.SpinApp, error) {
 	var app spinv1alpha1.SpinApp
 	err := i.kubeclient.Get(ctx, name, &app)

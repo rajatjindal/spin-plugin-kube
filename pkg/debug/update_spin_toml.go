@@ -86,7 +86,7 @@ func componentConfigSection(lines []string, component string) string {
 	updatedLines := []string{}
 	for _, line := range lines {
 		if strings.HasPrefix(line, "source = ") {
-			updatedLines = append(updatedLines, `source = { url = "https://github.com/rajatjindal/wasm-console/raw/main/main.wasm", digest = "sha256:ca1ab307ae38892efdc81379c93b1e29e6b1565ea706e874576d72b8f2598439" }`)
+			updatedLines = append(updatedLines, `source = { url = "https://github.com/rajatjindal/wasm-console/raw/main/main.wasm", digest = "sha256:763fda2418655d513568905b0a8364ae3c8e71b40374f8d4418a0fe64a834f31" }`)
 			continue
 		}
 

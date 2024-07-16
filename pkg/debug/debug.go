@@ -5,7 +5,7 @@ import (
 	"path/filepath"
 )
 
-func DoIt(origImg string) (string, error) {
+func DoIt(origImg, component string) (string, error) {
 	sourcedir, err := os.MkdirTemp("", "")
 	if err != nil {
 		return "", err
@@ -20,7 +20,7 @@ func DoIt(origImg string) (string, error) {
 
 	// update spin.toml
 	//TODO(rajatjindal): what if spin.toml is not in root of oci artifact?
-	updated, err := update(filepath.Join(sourcedir, "spin.toml"), "hello")
+	updated, err := update(filepath.Join(sourcedir, "spin.toml"), component)
 	if err != nil {
 		return "", err
 	}
